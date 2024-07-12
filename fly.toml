@@ -1,0 +1,27 @@
+# fly.toml app configuration file generated for json-to-elixir on 2024-07-12T17:48:22+02:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = 'json-to-elixir'
+primary_region = 'arn'
+
+[build]
+
+[deploy]
+  strategy = 'immediate'
+
+[env]
+  PORT = 8080
+  PROD = true
+
+[http_service]
+  internal_port = 8080
+  force_https = true
+  auto_stop_machines = true
+  auto_start_machines = true
+  min_machines_running = 0
+  processes = ['app']
+
+[[vm]]
+  size = 'shared-cpu-1x'
