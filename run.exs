@@ -1,6 +1,6 @@
 Mix.install([
   # {:phoenix_playground, path: "../phoenix_playground"},
-  {:phoenix_playground, github: "ringvold/phoenix_playground", branch: "fly-ready"},
+  {:phoenix_playground, "~> 0.1.4"},
   :jason
 ])
 
@@ -151,5 +151,3 @@ else
     PhoenixPlayground.start(live: JsonToElixirLive)
   end
 end
-
-
