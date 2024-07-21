@@ -75,22 +75,32 @@ defmodule JsonToElixirLive do
 
   def mount(_params, _session, socket) do
     initial = ~S|{"foo": "bar"}|
-    {:ok, assign(socket, transformed: Jason.decode!(initial), json: initial)}
+
+    {:ok,
+     assign(socket,
+       transformed: Jason.decode!(initial),
+       json: initial,
+       page_title: "JSON to Elixir"
+     )}
   end
 
   def render(assigns) do
     ~H"""
-    <script src="https://cdn.tailwindcss.com"></script>
+     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      var body = document.body;
+      body.className = "dark:bg-gray-800 dark:text-gray-100";
+    </script>
     <div class="mx-auto p-10">
       <h1 class="text-3xl font-bold mb-10">JSON to Elixir map</h1>
       <div class="flex flex-row flex-1 space-x-10" >
         <form class="flex-1" phx-change="change_json">
           <label for="json" class="my-4 text-2xl font-bold">JSON</label>
-          <textarea id="json" name="json" class="my-5 p-3 w-full h-96 rounded border border-zinc-500"><%= @json %></textarea>
+          <textarea id="json" name="json" class="my-5 p-3 w-full h-96 rounded border border-zinc-500 dark:bg-gray-700 dark:text-gray-100"><%= @json %></textarea>
         </form>
         <form class="flex-1" phx-change="change_map">
           <label for="map" class="my-4 text-2xl font-bold">Elixir map</label>
-          <textarea id="map" name="map" class="my-5 p-3 w-full h-96 rounded border border-zinc-500"><%= inspect(@transformed, structs: false, pretty: true) %></textarea>
+          <textarea id="map" name="map" class="my-5 p-3 w-full h-96 rounded border border-zinc-500 dark:bg-gray-700 dark:text-gray-100"><%= inspect(@transformed, structs: false, pretty: true) %></textarea>
         </form>
       </div>
     </div>
